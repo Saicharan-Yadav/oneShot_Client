@@ -16,6 +16,21 @@ function AllBlogs() {
     setPage(value);
   };
 
+  const editBlog = ({ title, content, id }) => {
+    setBlogs((prev) => {
+      return prev.map((blog) => {
+        if (blog._id == id) {
+          return {
+            ...blog,
+            title: title,
+            content: content,
+          };
+        }
+        return blog;
+      });
+    });
+  };
+
   useEffect(() => {
     axios
       .get("http://localhost:3000/blog/pagesCount")
@@ -52,7 +67,7 @@ function AllBlogs() {
       >
         {blogs.map((blog, index) => (
           <Grid item key={index} xs={12} sm={6} md={4}>
-            <PostCard title={blog.title} content={blog.content} />
+            <PostCard blog={blog} editBlog={editBlog} />
           </Grid>
         ))}
       </Grid>

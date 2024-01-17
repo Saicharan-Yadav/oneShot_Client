@@ -15,9 +15,10 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 
 const drawerWidth = 240;
-const navItems = ["New Blog", "LogOut"];
+const navItems = ["New Blog", "LogOut", "Profile"];
 
 function BlogNavBar(props) {
   const navigate = useNavigate();
@@ -56,6 +57,8 @@ function BlogNavBar(props) {
       navigate("/");
     } else if (e.target.innerText === "NEW BLOG") {
       navigate("/blogsCrud");
+    } else if (e.target.innerText === "PROFILE") {
+      navigate("/Profile");
     }
   };
 
