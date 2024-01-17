@@ -11,11 +11,34 @@ import UploadFileTwoToneIcon from "@mui/icons-material/UploadFileTwoTone";
 function CRUDblogs() {
   const navigate = useNavigate();
   const [image, setImage] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  // const [imageUrl, setImageUrl] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
-  async function submitImage(event) {
+  // async function submitImage(event) {
+  //   const data = new FormData();
+  //   data.append("file", image);
+  //   data.append("upload_preset", "blog_preset");
+  //   data.append("cloud_name", "dxy5iorbc");
+
+  //   axios
+  //     .post("https://api.cloudinary.com/v1_1/dxy5iorbc/image/upload", data, {
+  //       headers: {
+  //         "Content-Type": "multipart/form-data",
+  //       },
+  //     })
+  //     .then((res) => {
+  //       setImageUrl(res.data.secure_url);
+  //     })
+  //     .catch((err) => {
+  //       window.alert("Error while uploading image");
+  //       console.log(err);
+  //     });
+  // }
+
+  async function submit(e) {
+    e.preventDefault();
+    // await submitImage();
     const data = new FormData();
     data.append("file", image);
     data.append("upload_preset", "blog_preset");
@@ -28,41 +51,34 @@ function CRUDblogs() {
         },
       })
       .then((res) => {
-        setImageUrl(res.data.secure_url);
+        axios
+          .post(
+            "http://localhost:3000/blog/create",
+            {
+              title: title,
+              content: content,
+              imageurl: res.data.secure_url,
+            },
+            {
+              headers: {
+                Accept: "application/json",
+                Authorization: sessionStorage.getItem("acessToken"),
+              },
+            }
+          )
+          .then((res) => {
+            alert("Blog created successfully");
+            console.log("Created blog successfully");
+            navigate("/blogsCrud");
+            window.location.reload();
+          })
+          .catch((e) => {
+            console.log(e);
+          });
       })
       .catch((err) => {
         window.alert("Error while uploading image");
         console.log(err);
-      });
-  }
-
-  async function submit(e) {
-    e.preventDefault();
-    await submitImage();
-    axios
-      .post(
-        "http://localhost:3000/blog/create",
-        {
-          title: title,
-          content: content,
-          imageurl: imageUrl,
-        },
-        {
-          headers: {
-            Accept: "application/json",
-            Authorization: sessionStorage.getItem("acessToken"),
-          },
-        }
-      )
-      .then((res) => {
-        alert("Blog created successfully");
-        console.log("Created blog successfully");
-        navigate("/blogsCrud");
-        window.location.reload();
-      })
-      .catch((e) => {
-        alert(e);
-        console.log(e);
       });
   }
 

@@ -3,12 +3,13 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import Navbar from "./Navbar";
 import Grid from "@mui/material/Grid";
+import { useNavigate } from "react-router-dom";
 
 function EditBlog() {
+  const navigate = useNavigate();
   const location = useLocation();
   const receivedData = location.state.blog;
-  const editBlog = location.editBlog;
-  console.log(receivedData);
+
   const [title, setTitle] = useState(receivedData.title);
   const [content, setContent] = useState(receivedData.content);
 
@@ -36,7 +37,7 @@ function EditBlog() {
         }
       })
       .catch((e) => {
-        console.log(e.data);
+        console.log(e);
       });
   }, []);
 
@@ -86,9 +87,10 @@ function EditBlog() {
         }
       )
       .then((res) => {
-        editBlog({ title, content, id: receivedData._id });
+        // editBlog({ title, content, id: receivedData._id });
         window.alert("edited");
         console.log("submitted");
+        navigate("/blogs");
       })
       .catch((e) => {
         console.log(e);
@@ -112,9 +114,12 @@ function EditBlog() {
       )
       .then((res) => {
         console.log("deleted");
+        alert("deleted Sucessfully");
+        navigate("/blogs");
       })
       .catch((e) => {
         console.log(e);
+        alert("Error while deleting");
         // setError(e.data);
       });
   }
@@ -142,7 +147,7 @@ function EditBlog() {
               if (owner) setContent(e.target.value);
             }}
           />
-          {console.log(ownerRef.current)}
+
           <Grid container spacing={2}>
             {owner && (
               <Grid item xs={6}>
