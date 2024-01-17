@@ -9,8 +9,8 @@
 
 #### Optional Functionalities
 
-- Implemented Pagination
-- Image Deployment using Cloudinary
+- _Implemented Pagination_
+- _Image Deployment using Cloudinary_
 
 ### `Run Command : npm run start`
 
