@@ -49,7 +49,7 @@ function CRUDblogs() {
             alert("Blog created successfully");
             console.log("Created blog successfully");
             navigate("/blogs");
-            window.location.reload();
+            // window.location.reload();
           })
           .catch((e) => {
             console.log(e);
