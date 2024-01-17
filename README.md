@@ -2,9 +2,17 @@
 
 ## Built Using MERN Stack, MaterialUI for Styling
 
-In the project directory, you can run:
+- _Functionalities Applied in Mern App_
+- SignUp / SignIn Functionalities
+- Creation, Deletion , Edit Functionalities on blogs
+- Logout and Profile Preview
 
-### `npm start`
+#### Optional Functionalities
+
+- Implemented Pagination
+- Image Deployment using Cloudinary
+
+### `Run Command : npm run start`
 
 Runs the app in the development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
