@@ -32,7 +32,7 @@ function AllBlogs() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/blog/pagesCount")
+      .get("https://oneshotbackend-rgyj.onrender.com/blog/pagesCount")
       .then((res) => {
         limitRef.current = res.data.count;
       })
@@ -43,7 +43,9 @@ function AllBlogs() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/blog/getall?page=${page}&limit=10`)
+      .get(
+        `https://oneshotbackend-rgyj.onrender.com/blog/getall?page=${page}&limit=10`
+      )
       .then((res) => {
         setBlogs(res.data.blogs);
       })

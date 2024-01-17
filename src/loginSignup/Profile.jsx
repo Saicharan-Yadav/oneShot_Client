@@ -28,7 +28,7 @@ function Profile() {
   const [profile, setProfile] = useState({});
   useEffect(() => {
     axios
-      .get("http://localhost:3000/blog/profile", {
+      .get("https://oneshotbackend-rgyj.onrender.com/profile", {
         headers: {
           Accept: "application/json",
           Authorization: sessionStorage.getItem("acessToken"),

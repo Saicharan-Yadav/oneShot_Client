@@ -31,7 +31,7 @@ export default function Login() {
     const data = new FormData(event.currentTarget);
 
     axios
-      .post("http://localhost:3000/", {
+      .post("https://oneshotbackend-rgyj.onrender.com/", {
         email: data.get("email"),
         password: data.get("password"),
       })

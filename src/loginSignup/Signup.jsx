@@ -95,7 +95,7 @@ export default function SignUp() {
         // setImageUrl(res.data.secure_url);
         data1.imageurl = res.data.secure_url;
         axios
-          .post("http://localhost:3000/signup", data1)
+          .post("https://oneshotbackend-rgyj.onrender.com/signup", data1)
           .then((res) => {
             alert(res.data.msg);
 

@@ -20,7 +20,7 @@ function EditBlog() {
   useEffect(() => {
     axios
       .post(
-        "http://localhost:3000/blog/owner",
+        "https://oneshotbackend-rgyj.onrender.com/blog/owner",
         { blog_id: receivedData._id },
         {
           headers: {
@@ -73,7 +73,7 @@ function EditBlog() {
     // console.log(title, content, receivedData._id);
     axios
       .put(
-        "http://localhost:3000/blog/edit",
+        "https://oneshotbackend-rgyj.onrender.com/blog/edit",
         {
           title: title,
           content: content,
@@ -103,7 +103,7 @@ function EditBlog() {
     // console.log(title, content, receivedData._id);
     axios
       .post(
-        `http://localhost:3000/blog/delete/`,
+        `https://oneshotbackend-rgyj.onrender.com/blog/delete/`,
         { blog_id: receivedData._id },
         {
           headers: {

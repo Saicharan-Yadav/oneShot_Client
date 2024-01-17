@@ -32,7 +32,7 @@ function CRUDblogs() {
       .then((res) => {
         axios
           .post(
-            "http://localhost:3000/blog/create",
+            "https://oneshotbackend-rgyj.onrender.com/blog/create",
             {
               title: title,
               content: content,
