@@ -48,7 +48,7 @@ function CRUDblogs() {
           .then((res) => {
             alert("Blog created successfully");
             console.log("Created blog successfully");
-            navigate("/blogsCrud");
+            navigate("/blogs");
             window.location.reload();
           })
           .catch((e) => {
