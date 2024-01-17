@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
-
+import BookIcon from "@mui/icons-material/Book";
 function LoginSignUpNavbar(props) {
   const buttonStyle = {
     textDecoration: "none", // Remove underline
@@ -34,6 +34,9 @@ function LoginSignUpNavbar(props) {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             24/7 Blogs
           </Typography>
+          <Link to="/blogs" style={buttonStyle}>
+            Blogs <BookIcon />
+          </Link>
           <Link to={props.navbutton} style={buttonStyle}>
             <Button color="inherit">
               {props.navbutton === "/" ? "Sign-In" : props.navbutton}

@@ -16,11 +16,21 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import { Link } from "react-router-dom";
+import BookIcon from "@mui/icons-material/Book";
 
 const drawerWidth = 240;
 const navItems = ["New Blog", "LogOut", "Profile"];
 
 function BlogNavBar(props) {
+  const buttonStyle = {
+    textDecoration: "none", // Remove underline
+    color: "inherit", // Use the default text color
+    background: "none", // Remove background color
+    border: "none", // Remove border
+    cursor: "pointer", // Show pointer cursor on hover
+    // Add any additional styles you need
+  };
   const navigate = useNavigate();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -31,9 +41,12 @@ function BlogNavBar(props) {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
-        24/7 Blog
-      </Typography>
+      {/* <Typography variant="h6" sx={{ my: 2 }}>
+        <Link to="/blogs">24/7 Blogs</Link>
+      </Typography> */}
+      <Link to="/blogs" style={buttonStyle}>
+        24/7 Blogs <BookIcon />
+      </Link>
       <Divider />
       <List>
         {navItems.map((item) => (

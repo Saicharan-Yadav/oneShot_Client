@@ -5,6 +5,8 @@ import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import Alert from "@mui/material/Alert";
+
 import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
@@ -47,7 +49,7 @@ const theme = createTheme();
 
 export default function SignUp() {
   const [image, setImage] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  // const [imageUrl, setImageUrl] = useState("");
   const navigate = useNavigate();
 
   const nameRef = useRef(null);
@@ -63,42 +65,24 @@ export default function SignUp() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await submitImage();
+    // await submitImage();
     let name = nameRef.current.value;
     let email = emailRef.current.value;
     let password = passwordRef.current.value;
     let password1 = password1Ref.current.value;
 
-    const data = {
-      email: email,
-      name: name,
-      password: password,
-      retypePassword: password1,
-      imageurl: imageUrl,
-    };
-
-    console.log(data);
-
-    axios
-      .post("http://localhost:3000/signup", data)
-      .then((res) => {
-        alert(res.data.msg);
-
-        if (res.data.msg === "User created successfully") {
-          navigate("/");
-        }
-      })
-      .catch((err) => {
-        window.alert(err);
-        console.log("error=>" + err);
-      });
-  };
-
-  const submitImage = async (e) => {
     const data = new FormData();
     data.append("file", image);
     data.append("upload_preset", "blog_preset");
     data.append("cloud_name", "dxy5iorbc");
+
+    const data1 = {
+      email: email,
+      name: name,
+      password: password,
+      retypePassword: password1,
+      imageurl: "",
+    };
 
     axios
       .post("https://api.cloudinary.com/v1_1/dxy5iorbc/image/upload", data, {
@@ -107,13 +91,62 @@ export default function SignUp() {
         },
       })
       .then((res) => {
-        console.log(res.data.secure_url); // This might be res.data or res.data.url, depending on Cloudinary's response structure.
-        setImageUrl(res.data.secure_url);
+        // console.log(res.data.secure_url); // This might be res.data or res.data.url, depending on Cloudinary's response structure.
+        // setImageUrl(res.data.secure_url);
+        data1.imageurl = res.data.secure_url;
+        axios
+          .post("http://localhost:3000/signup", data1)
+          .then((res) => {
+            alert(res.data.msg);
+
+            if (res.data.msg === "User created successfully") {
+              navigate("/");
+            }
+          })
+          .catch((err) => {
+            window.alert(err);
+            console.log("error=>" + err);
+          });
       })
       .catch((err) => {
         console.log(err.message);
       });
+
+    // axios
+    //   .post("http://localhost:3000/signup", data1)
+    //   .then((res) => {
+    //     alert(res.data.msg);
+
+    //     if (res.data.msg === "User created successfully") {
+    //       navigate("/");
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     window.alert(err);
+    //     console.log("error=>" + err);
+    //   });
   };
+
+  // const submitImage = async (e) => {
+  //   const data = new FormData();
+  //   data.append("file", image);
+  //   data.append("upload_preset", "blog_preset");
+  //   data.append("cloud_name", "dxy5iorbc");
+
+  //   axios
+  //     .post("https://api.cloudinary.com/v1_1/dxy5iorbc/image/upload", data, {
+  //       headers: {
+  //         "Content-Type": "multipart/form-data",
+  //       },
+  //     })
+  //     .then((res) => {
+  //       console.log(res.data.secure_url); // This might be res.data or res.data.url, depending on Cloudinary's response structure.
+  //       setImageUrl(res.data.secure_url);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.message);
+  //     });
+  // };
 
   return (
     <>
