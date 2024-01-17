@@ -12,7 +12,6 @@ function AllBlogs() {
   const [page, setPage] = useState(1);
   const limitRef = useRef(10);
   const handleChange = (event, value) => {
-    // console.log(value);
     setPage(value);
   };
 
@@ -35,10 +34,7 @@ function AllBlogs() {
     axios
       .get("http://localhost:3000/blog/pagesCount")
       .then((res) => {
-        // console.log(res.data);
-        // console.log("1");
         limitRef.current = res.data.count;
-        console.log(limitRef.current);
       })
       .catch((err) => {
         console.log(err);
@@ -49,7 +45,6 @@ function AllBlogs() {
     axios
       .get(`http://localhost:3000/blog/getall?page=${page}&limit=10`)
       .then((res) => {
-        // console.log("2");
         setBlogs(res.data.blogs);
       })
       .catch((err) => {
@@ -60,11 +55,7 @@ function AllBlogs() {
     <>
       <BlogNavBar />
 
-      <Grid
-        container
-        spacing={2}
-        style={{ margin: "20px 10px" }} // Adjust spacing based on your design
-      >
+      <Grid container spacing={2} style={{ margin: "20px 10px" }}>
         {blogs.map((blog, index) => (
           <Grid item key={index} xs={12} sm={6} md={4}>
             <PostCard blog={blog} editBlog={editBlog} />

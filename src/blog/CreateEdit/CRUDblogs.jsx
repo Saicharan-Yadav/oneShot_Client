@@ -1,21 +1,21 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import Navbar from "./Navbar";
 import axios from "axios";
-import "./crud.css"; // Import the CSS file
+import "./crud.css";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import UploadFileTwoToneIcon from "@mui/icons-material/UploadFileTwoTone";
-import Button from "@mui/material/Button";
 
 function CRUDblogs() {
+  const navigate = useNavigate();
   const [image, setImage] = useState("");
-  const [imageUrl, setImageUrl] = useState(""); // This is the URL we'll use to display the image on the page.
+  const [imageUrl, setImageUrl] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState("");
 
-  function submitImage(event) {
+  async function submitImage(event) {
     const data = new FormData();
     data.append("file", image);
     data.append("upload_preset", "blog_preset");
@@ -28,17 +28,17 @@ function CRUDblogs() {
         },
       })
       .then((res) => {
-        console.log(res.data.secure_url); // This might be res.data or res.data.url, depending on Cloudinary's response structure.
         setImageUrl(res.data.secure_url);
       })
       .catch((err) => {
-        console.log(err.message);
+        window.alert("Error while uploading image");
+        console.log(err);
       });
   }
 
-  function submit(e) {
+  async function submit(e) {
     e.preventDefault();
-    submitImage();
+    await submitImage();
     axios
       .post(
         "http://localhost:3000/blog/create",
@@ -55,25 +55,15 @@ function CRUDblogs() {
         }
       )
       .then((res) => {
-        // if (res.data.code === 200) {
-        console.log("submitted");
-        setSubmitted(true);
+        alert("Blog created successfully");
+        console.log("Created blog successfully");
+        navigate("/blogsCrud");
+        window.location.reload();
       })
       .catch((e) => {
-        setError(e.data);
+        alert(e);
+        console.log(e);
       });
-  }
-
-  if (error) {
-    return <p className="error-message">{error}</p>;
-  }
-
-  if (submitted) {
-    return (
-      <p className="success-message">
-        We've received your message, thank you for contacting us!
-      </p>
-    );
   }
 
   return (
@@ -114,16 +104,9 @@ function CRUDblogs() {
               fontWeight: "700",
             }}
           >
+            Upload Blog Image
             <UploadFileTwoToneIcon />
             <input type="file" onChange={(e) => setImage(e.target.files[0])} />
-            <Button
-              type="submit"
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              // onClick={submitImage}
-            >
-              Upload
-            </Button>
           </Box>
         </Grid>
 

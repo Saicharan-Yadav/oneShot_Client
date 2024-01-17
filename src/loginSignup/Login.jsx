@@ -29,22 +29,18 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
     axios
       .post("http://localhost:3000/", {
         email: data.get("email"),
         password: data.get("password"),
       })
       .then((res) => {
-        console.log(res.data.acessToken);
         sessionStorage.setItem("acessToken", res.data.acessToken);
         navigate("/blogs");
       })
       .catch((e) => {
-        console.log(e.response.data.msg);
+        alert(e.response.data.msg);
       });
   };
   let url = "url(https://source.unsplash.com/random)";

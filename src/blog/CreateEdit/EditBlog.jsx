@@ -87,6 +87,7 @@ function EditBlog() {
       )
       .then((res) => {
         editBlog({ title, content, id: receivedData._id });
+        window.alert("edited");
         console.log("submitted");
       })
       .catch((e) => {

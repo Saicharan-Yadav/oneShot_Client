@@ -54,6 +54,7 @@ function Navbar(props) {
     console.log(e.target.innerText);
     if (e.target.innerText === "LOGOUT") {
       sessionStorage.removeItem("acessToken");
+      alert("logged out successfully");
       navigate("/");
     } else if (e.target.innerText === "NEW BLOG") {
       navigate("/blogsCrud");

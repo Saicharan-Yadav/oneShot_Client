@@ -61,9 +61,9 @@ export default function SignUp() {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
+    await submitImage();
     let name = nameRef.current.value;
     let email = emailRef.current.value;
     let password = passwordRef.current.value;
@@ -82,17 +82,19 @@ export default function SignUp() {
     axios
       .post("http://localhost:3000/signup", data)
       .then((res) => {
-        console.log(res.data.msg);
+        alert(res.data.msg);
+
         if (res.data.msg === "User created successfully") {
           navigate("/");
         }
       })
       .catch((err) => {
+        window.alert(err);
         console.log("error=>" + err);
       });
   };
 
-  const submitImage = (e) => {
+  const submitImage = async (e) => {
     const data = new FormData();
     data.append("file", image);
     data.append("upload_preset", "blog_preset");
@@ -290,14 +292,14 @@ export default function SignUp() {
                     type="file"
                     onChange={(e) => setImage(e.target.files[0])}
                   />
-                  <Button
+                  {/* <Button
                     type="submit"
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                     onClick={submitImage}
                   >
                     Upload
-                  </Button>
+                  </Button> */}
                 </Box>
               </Grid>
               <Button
