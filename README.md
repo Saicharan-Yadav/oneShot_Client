@@ -1,5 +1,9 @@
 # 24/7 Blogs Website .
 
+Frontend Url: [https://github.com/Saicharan-Yadav/oneShot_Client](https://github.com/Saicharan-Yadav/oneShot_Client)
+
+Backend URL: [https://github.com/Saicharan-Yadav/oneShot](https://github.com/Saicharan-Yadav/oneShot)
+
 ## Built Using MERN Stack, MaterialUI for Styling
 
 - _Functionalities Applied in Mern App_
